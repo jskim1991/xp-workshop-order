@@ -1,4 +1,4 @@
-package xp.workshop.order;
+package xp.workshop.order.domain;
 
 import lombok.Getter;
 
@@ -7,6 +7,7 @@ public class Order {
 
     private String id;
     private int totalPrice;
+    // private String note;
 
     public Order(String id, int totalPrice) {
         this.id = id;
