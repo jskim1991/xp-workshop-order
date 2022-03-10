@@ -15,6 +15,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class OrderControllerTests {
 
+    // 관리자 페이지
+    // 전체 주문 목록을 보고 싶다.
+    // 주문 상세 내역을 보고 싶다.
+
     private MockMvc mockMvc;
     private StubOrderRepository stubOrderRepository;
 
@@ -28,13 +32,15 @@ public class OrderControllerTests {
 
     @Test
     void getOrders_isOk() throws Exception {
+        // call the shot
         mockMvc.perform(get("/orders"))
                 .andExpect(status().isOk());
     }
 
     @Test
     void getOrders_returnsOrderList() throws Exception {
-        stubOrderRepository.setFindAll_returnValue(Collections.singletonList(new Order("1", 5)));
+        // 테스트 더블
+        stubOrderRepository.setReturnValueForFindAll(Collections.singletonList(new Order("1", 5)));
 
 
         mockMvc.perform(get("/orders"))

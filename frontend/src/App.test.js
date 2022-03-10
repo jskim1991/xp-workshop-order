@@ -25,8 +25,8 @@ describe('App', () => {
         renderAppWithStub([{ id: 1, totalPrice: 1000 }])
 
         await waitFor(() => {
-            expect(screen.getByText('ID: 1')).toBeInTheDocument()
-            expect(screen.getByText('TOTAL PRICE: 1000')).toBeInTheDocument()
+            expect(screen.getByText('1')).toBeInTheDocument()
+            expect(screen.getByText('1000')).toBeInTheDocument()
         })
     })
 })

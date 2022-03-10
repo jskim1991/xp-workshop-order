@@ -11,6 +11,7 @@ public class InMemoryOrderStore implements OrderRepository {
 
     @Override
     public List<Order> findAll() {
+        // 하드 코딩
         return Arrays.asList(
                 new Order("1", 1000),
                 new Order("2", 2000),

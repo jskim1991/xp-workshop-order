@@ -5,14 +5,18 @@ import xp.workshop.order.domain.Order;
 import java.util.List;
 
 public class StubOrderRepository implements OrderRepository {
-    private List<Order> findAll_returnValue;
+    private List<Order> returnValueForFindAll;
 
     @Override
     public List<Order> findAll() {
-        return findAll_returnValue;
+        return returnValueForFindAll;
     }
 
-    public void setFindAll_returnValue(List<Order> findAll_returnValue) {
-        this.findAll_returnValue = findAll_returnValue;
+    public void returnValueForFindAll(List<Order> returnValueForFindAll) {
+        this.returnValueForFindAll = returnValueForFindAll;
+    }
+
+    public void setReturnValueForFindAll(List<Order> returnValueForFindAll) {
+        this.returnValueForFindAll = returnValueForFindAll;
     }
 }
