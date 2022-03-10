@@ -1,8 +1,39 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { render, screen, waitFor } from '@testing-library/react'
+import App from './App'
+import axios from 'axios'
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+jest.mock('axios')
+
+describe('App', () => {
+    it('renders "Orders" title', async () => {
+        renderAppWithStub()
+
+        await waitFor(() => {
+            expect(screen.getByText('Orders')).toBeInTheDocument()
+        })
+    })
+
+    it('should fetch orders from backend', async () => {
+        renderAppWithStub()
+
+        await waitFor(() => {
+            expect(axios.get).toHaveBeenCalledWith('/api/orders')
+        })
+    })
+
+    it('renders order id and price', async () => {
+        renderAppWithStub([{ id: 1, totalPrice: 1000 }])
+
+        await waitFor(() => {
+            expect(screen.getByText('ID: 1')).toBeInTheDocument()
+            expect(screen.getByText('TOTAL PRICE: 1000')).toBeInTheDocument()
+        })
+    })
+})
+
+const renderAppWithStub = (orders = []) => {
+    axios.get.mockResolvedValue({
+        data: orders,
+    })
+    render(<App />)
+}
